@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@braid/vue-formulate": "^2.5.3",
+    "@formkit/vue": "^1.4.0"
+  }
+}
