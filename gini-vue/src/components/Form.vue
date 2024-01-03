@@ -11,7 +11,7 @@ import {
 const submitted = ref(false);
 const submitHandler = async (value) => {
   // Let's pretend this is an ajax request:
-  await new Promise((r) => setTimeout(console.log(value), 1000));
+  await new Promise((r) => setTimeout(console.log({details: value}), 1000));
   submitted.value = true;
 };
 const handleIconClick = (node, e) => {
@@ -51,7 +51,7 @@ const handleIconClick = (node, e) => {
       name="first_name"
       label="Your name"
       placeholder="Doe"
-      validation="required|length:2,10"
+      validation="required|length:2,10|matches:/^[a-zA-Z]+$/"
     />
 
     <FormKit
@@ -59,7 +59,7 @@ const handleIconClick = (node, e) => {
       name="last_name"
       label="Your last name"
       placeholder="Jane"
-      validation="required|length:2,15"
+      validation="required|length:2,15|matches:/^[a-zA-Z]+$/"
     />
 
     <FormKit
@@ -121,7 +121,12 @@ const handleIconClick = (node, e) => {
       />
     </div>
 
-    <FormKit type="submit" label="Submit" />
+    <FormKit
+      type="submit"
+      class="mt-4"
+      :disabled="value.valid"
+    />
+    
   </FormKit>
   <div v-if="submitted">
     <h2 class="text-xl text-green-500">Submission successful!</h2>
